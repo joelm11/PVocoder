@@ -1,7 +1,8 @@
 function [Moduli, Phase] = PVAnalysis(x, winSize, hopSize)
 % Perform analysis portion of phase vocoder 
 % Reference: Bernardini et al. 
- 
+% TODO: Loop and containers need to be adapted for different length inputs  
+
 % Variables to do with samples and windowing
 numSamp = length(x);
 numWin = ceil(numSamp / (hopSize) - 1);   
@@ -21,7 +22,7 @@ for i = 1:numWin
     wcurrWin = currWin .* hanWin; 
     % Calculate spectrum 
     X = fft(wcurrWin);  
-    % Shift (Need to clarify why this is done) 
+    % Shift (Need to clarify why this is done) (Phase unwrapping)
     XCentered = fftshift(X);
     % Store spectrum for output
     R = abs(XCentered); 
