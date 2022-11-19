@@ -5,7 +5,7 @@ function [Moduli, Phase] = PVAnalysis(x, winSize, hopSize)
 
 % Variables to do with samples and windowing
 numSamp = length(x);
-numWin = ceil(numSamp / (hopSize) - 1);   
+numWin = ceil((numSamp - winSize) / (hopSize) - 1);   
 % Matrices to store output data (Every row is a new window)
 Moduli = zeros(numWin, winSize);
 Phase = zeros(numWin, winSize);
