@@ -12,7 +12,7 @@ synPhase = zeros(numFrames, numBins);
 instFreq = zeros(numFrames, numBins); 
 synthOut = zeros(numFrames, numBins);
 reconstrWins = zeros(numFrames, numBins);  
-reconstOutp = zeros(1, synthHop * numFrames + numBins); % WARNING HARDCODE 
+reconstOutp = zeros(1, synthHop * numFrames + numBins); 
 
 
 % Loop over frames and calculate instantaneous frequency 
@@ -46,6 +46,8 @@ for j = 2 : numFrames
     lst = start + numBins - 1;
     mid = lst - synthHop;
 end 
-% Resynthesis loop
+% TODO: This scaling seems to reduce reverbation somewhat 
+scale = sum(hanning(numBins).^2) / synthHop; 
+reconstOutp(1, :) = reconstOutp(1, :) / scale;
 
 end
